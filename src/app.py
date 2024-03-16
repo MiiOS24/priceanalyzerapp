@@ -284,7 +284,7 @@ app.layout = html.Div([
     ),
     html.Div([
         html.Img(src='assets/Header_PriceAnalyzer.jpg'),
-        html.A(html.Img(src='assets/Feedback_PriceAnalyzer.jpg'), href='http://www.miios.de', target='_blank'),
+        html.A(html.Img(src='assets/Feedback_PriceAnalyzer.jpg'), href='https://forms.office.com/Pages/ResponsePage.aspx?id=lIkX3lPYBk6rI3GE28OEZn_hulrk9ZNKrDbnahImCUpUMU40MlhFQU1EMFRSQ0xDNUlGNTlRQ1RNWC4u', target='_blank'),
         html.Div([
             html.Div([
                 html.H2("Kerndaten auf einem Blick:", style={'textAlign': 'left', 'margin-top': '20px'})
