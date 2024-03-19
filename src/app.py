@@ -50,7 +50,9 @@ def get_color(value):
 def format_number(value):
     if value is None:
         return 'N/A'
-    return f"{value:,}".replace(",", ".")
+    # Format the number with a comma as thousand separator, then replace comma with dot
+    formatted_number = f"{value:,.0f}".replace(",", ".")
+    return formatted_number
 
 
 # Load data
@@ -450,10 +452,19 @@ def update_tiles(selected_category, selected_age_cat):
     ], style=tile_style)
 
     tile_2_content = html.Div([
-        html.Div(html.Strong("Trend (Vorjahr)"), style={'margin-bottom': '5px'}),
-        html.Div("(vs. Q4/2022):", style={'margin-bottom': '10px'}),
-        html.Div(html.Span(f"{percentage_diff_2022:.2f}%", style={'color': get_color(percentage_diff_2022)}) if percentage_diff_2022 is not None else 'Data not available', style=number_style)
-    ], style=tile_style)
+    html.Div(html.Strong("Trend (Vorjahr)"), style={'margin-bottom': '5px'}),
+    html.Div("(vs. Q4/2022):", style={'margin-bottom': '10px'}),
+    html.Div([
+        html.Span(f"{percentage_diff_2022:.2f}%", style={'color': get_color(percentage_diff_2022)}),
+        html.Span(f" ({format_number(median_price_2022)} €)" if median_price_2022 else ' (Data not available)', style={
+            'color': '#888',  # Adjust the color as needed
+            'font-size': '80%',  # Smaller font size
+            'font-weight': 'normal'  # Remove bold styling
+        })
+    ], style=number_style) if percentage_diff_2022 is not None else 'Data not available'
+], style=tile_style)
+
+
 
     tile_3_content = html.Div([
         html.Div(html.Strong("Trend (letztes Quartal)"), style={'margin-bottom': '5px'}),
