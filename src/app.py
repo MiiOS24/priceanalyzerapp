@@ -286,7 +286,7 @@ app.layout = html.Div([
     ),
     html.Div([
         html.Img(src='assets/Header_PriceAnalyzer.jpg'),
-        html.A(html.Img(src='assets/Feedback_PriceAnalyzer.jpg'), href='https://forms.office.com/Pages/ResponsePage.aspx?id=lIkX3lPYBk6rI3GE28OEZn_hulrk9ZNKrDbnahImCUpUMU40MlhFQU1EMFRSQ0xDNUlGNTlRQ1RNWC4u', target='_blank'),
+        
         html.Div([
             html.Div([
                 html.H2("Kerndaten auf einem Blick:", style={'textAlign': 'left', 'margin-top': '20px'})
@@ -392,6 +392,7 @@ app.layout = html.Div([
             ),
         ], style={'width': '50%', 'display': 'inline-block'}),
     ], style={'display': 'flex', 'width': '100%', 'margin-top': '20px'}),
+    html.A(html.Img(src='assets/Feedback_PriceAnalyzer.jpg'), href='https://forms.office.com/Pages/ResponsePage.aspx?id=lIkX3lPYBk6rI3GE28OEZn_hulrk9ZNKrDbnahImCUpUMU40MlhFQU1EMFRSQ0xDNUlGNTlRQ1RNWC4u', target='_blank'),
 
     ], style={'fontFamily': 'Roboto Condensed', 'maxWidth': '1000px', 'margin': '0 auto'})
 ])
