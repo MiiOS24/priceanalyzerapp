@@ -56,7 +56,7 @@ def format_number(value):
 
 
 # Load data
-df = pd.read_csv('pricedata8.csv')
+df = pd.read_csv('20240405_pricedata.csv')
 
 df = df[~df['Kategorie'].isin(['Bus', 'Wohnwagen'])]
 
@@ -417,16 +417,16 @@ def update_tiles(selected_category, selected_age_cat):
 
 
     # Calculate Median-Verkaufspreis for Q4 2023
-    q4_2023_data = filtered_data[filtered_data['Quarter'] == '2023Q4']
+    q4_2023_data = filtered_data[filtered_data['Quarter'] == '2024Q1']
     median_price_2023 = round(q4_2023_data['Verkaufspreis'].median())
 
     # Calculate percentage difference vs. Q4 2022
-    q4_2022_data = filtered_data[filtered_data['Quarter'] == '2022Q4']
+    q4_2022_data = filtered_data[filtered_data['Quarter'] == '2023Q1']
     median_price_2022 = q4_2022_data['Verkaufspreis'].median()
     percentage_diff_2022 = ((median_price_2023 - median_price_2022) / median_price_2022) * 100 if median_price_2022 else None
 
     # Calculate percentage difference vs. previous quarter
-    current_quarter_period = pd.Period('2023Q4', freq='Q')  # Ändern Sie dies entsprechend, um das aktuelle Quartal dynamisch zu bestimmen
+    current_quarter_period = pd.Period('2024Q1', freq='Q')  # Ändern Sie dies entsprechend, um das aktuelle Quartal dynamisch zu bestimmen
     previous_quarter_period = current_quarter_period - 1
     previous_quarter = previous_quarter_period.strftime('Q%q/%Y')
     
@@ -448,13 +448,13 @@ def update_tiles(selected_category, selected_age_cat):
     # Formatting tile contents
     tile_1_content = html.Div([
         html.Div(html.Strong("Händlereinkaufspreis"), style={'margin-bottom': '5px'}),
-        html.Div("(Q4/2023):", style={'margin-bottom': '10px'}),
+        html.Div("(Q1/2024):", style={'margin-bottom': '10px'}),
         html.Div(format_number(median_price_2023) + " €" if median_price_2023 else 'Data not available', style=number_style)
     ], style=tile_style)
 
     tile_2_content = html.Div([
     html.Div(html.Strong("Trend (Vorjahr)"), style={'margin-bottom': '5px'}),
-    html.Div("(vs. Q4/2022):", style={'margin-bottom': '10px'}),
+    html.Div("(vs. Q1/2023):", style={'margin-bottom': '10px'}),
     html.Div([
         html.Span(f"{percentage_diff_2022:.2f}%", style={'color': get_color(percentage_diff_2022)}),
         html.Span(f" ({format_number(median_price_2022)} €)" if median_price_2022 else ' (Data not available)', style={
