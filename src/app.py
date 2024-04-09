@@ -65,6 +65,7 @@ data = df
 data['Verkauf in'] = pd.to_datetime(data['Verkauf in'])
 data['Quarter'] = data['Verkauf in'].dt.to_period('Q')
 
+print(df.shape[0])
 
 
 
@@ -335,7 +336,7 @@ app.layout = html.Div([
                 html.P("Co-Gründer & Geschäftsführer caravanmarkt24.de", style={'color': 'black', 'margin': '0'})  # Subtitle in normal size and black color
                     ], style={'width': '75%', 'display': 'inline-block', 'padding': '5px'})
                 ], style={'display': 'flex', 'alignItems': 'center'}),
-                html.P("""Der Markt für gebrauchte Freizeitfahrzeuge bietet Chancen für den Handel, mit stabiler Nachfrage und moderaten Preissenkungen in bestimmten Segmenten und Altersklassen. Besonders gefragt sind gut gepflegte Reisemobile und Caravans der Altersklasse 2-4 Jahre. Fachhändler können durch den Zukauf junger Gebrauchter Erträge sichern und neue Kundensegmente erschließen. caravanmarkt24 rät zum Mut beim Gebrauchtwagenhandel!
+                html.P("""Einmal mehr unterstreicht das aktuell positive Marktgeschehen die Resilienz und Stärke des Gebrauchtwagensegments. Die Nachfrage nach gebrauchten Reisemobilen befindet sich auf Rekordniveau, die Preise bleiben stabil, das Angebot insbesondere in den Altersklassen ab 2021 und älter recht überschaubar. Händler können die Gunst der Stunde nutzen und durch den selektiven Zukauf von gepflegten Gebrauchtwagen Umsätze und Erträge steigern und neue Kundengruppen erschließen.
 """,
                 style={
                     'backgroundColor': '#f0f0f0',
@@ -501,13 +502,16 @@ def update_graph(selected_category, selected_age_cat):
 
     # Group by quarter after filtering
     filtered_quarterly = filtered_data.groupby('Quarter').agg({'Verkaufspreis': 'median'}).reset_index()
-
+    xxx = filtered_data.groupby('Quarter').agg(
+    median_price=('Verkaufspreis', 'median'), 
+    total_sales=('Verkauf in', 'size')
+).reset_index()
     # Identify the last 5 quarters in the dataset
     last_5_quarters = filtered_quarterly['Quarter'].unique()[-5:]
-
+    
     # Filter data to only include these quarters
     filtered_quarterly = filtered_quarterly[filtered_quarterly['Quarter'].isin(last_5_quarters)]
-
+    print(xxx)
     # Adjust values to thousands for the graph
     filtered_quarterly['Verkaufspreis'] = filtered_quarterly['Verkaufspreis'] / 1000
 
