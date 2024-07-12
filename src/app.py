@@ -56,7 +56,7 @@ def format_number(value):
 
 
 # Load data
-df = pd.read_csv('20240405_pricedata.csv')
+df = pd.read_csv('20240712_pricedata.csv')
 
 df = df[~df['Kategorie'].isin(['Bus', 'Wohnwagen'])]
 
