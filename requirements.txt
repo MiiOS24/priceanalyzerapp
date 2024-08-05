@@ -2,3 +2,4 @@ dash==2.16.1
 pandas==2.2.1
 gunicorn
 dash-tools
+setuptools==57.5.0
