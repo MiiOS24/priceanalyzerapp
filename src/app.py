@@ -54,14 +54,14 @@ def format_number(value):
 
 
 # Load data
-df = pd.read_csv('20240712_pricedata.csv')
+df = pd.read_csv('20240805_pricedata.csv')
 
 #df = df[~df['Kategorie'].isin(['Bus', 'Wohnwagen'])]
 
 # Data preprocessing
 data = df
-#data['Verkauf in'] = pd.to_datetime(data['Verkauf in'])
-#data['Quarter'] = data['Verkauf in'].dt.to_period('Q')
+data['Verkauf in'] = pd.to_datetime(data['Verkauf in'])
+data['Quarter'] = data['Verkauf in'].dt.to_period('Q')
 
 print(df.shape[0])
 
