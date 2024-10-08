@@ -54,7 +54,7 @@ def format_number(value):
 
 
 # Load data
-df = pd.read_csv('20240805_pricedata.csv')
+df = pd.read_csv('20241008_pricedata.csv')
 
 #df = df[~df['Kategorie'].isin(['Bus', 'Wohnwagen'])]
 
@@ -320,7 +320,7 @@ app.layout = html.Div([
         ], style={'display': 'flex', 'width': '100%'}),
         html.Div([
             html.Div([
-                html.H2("Preisentwicklung seit Q4/2022", style={'textAlign': 'center'}),
+                html.H2("Preisentwicklung seit Q3/2023", style={'textAlign': 'center'}),
                 dcc.Graph(id='price-graph'),
                 
             ], style={'width': '60%', 'display': 'inline-block'}),
@@ -334,8 +334,7 @@ app.layout = html.Div([
                 html.P("Co-Gründer & Geschäftsführer caravanmarkt24.de", style={'color': 'black', 'margin': '0'})  # Subtitle in normal size and black color
                     ], style={'width': '75%', 'display': 'inline-block', 'padding': '5px'})
                 ], style={'display': 'flex', 'alignItems': 'center'}),
-                html.P("""Einmal mehr unterstreicht das aktuell positive Marktgeschehen die Resilienz und Stärke des Gebrauchtwagensegments. Die Nachfrage nach gebrauchten Reisemobilen befindet sich auf Rekordniveau, die Preise bleiben stabil, das Angebot insbesondere in den Altersklassen ab 2021 und älter recht überschaubar. Händler können die Gunst der Stunde nutzen und durch den selektiven Zukauf von gepflegten Gebrauchtwagen Umsätze und Erträge steigern und neue Kundengruppen erschließen.
-""",
+                html.P("""Trotz der Herausforderungen in der Branche bleibt das Gebrauchtwagensegment eine verlässliche und ertragreiche Säule. Die starke Nachfrage nach gebrauchten Wohnmobilen und Caravans zeigt sich in den KBA-Zahlen. Handelsbetriebe können durch den Zukauf von Freizeitfahrzeugen neue Ertragspotenziale erschließen. Caravanmarkt24.de bietet dabei eine stetige Zukaufsquelle für Fahrzeuge aller Art.""",
                 style={
                     'backgroundColor': '#f0f0f0',
                     'borderRadius': '10px',
@@ -416,16 +415,16 @@ def update_tiles(selected_category, selected_age_cat):
 
 
     # Calculate Median-Verkaufspreis for Q4 2023
-    q4_2023_data = filtered_data[filtered_data['Quarter'] == '2024Q2']
+    q4_2023_data = filtered_data[filtered_data['Quarter'] == '2024Q3']
     median_price_2023 = round(q4_2023_data['Verkaufspreis'].median())
 
     # Calculate percentage difference vs. Q4 2022
-    q4_2022_data = filtered_data[filtered_data['Quarter'] == '2023Q2']
+    q4_2022_data = filtered_data[filtered_data['Quarter'] == '2023Q3']
     median_price_2022 = q4_2022_data['Verkaufspreis'].median()
     percentage_diff_2022 = ((median_price_2023 - median_price_2022) / median_price_2022) * 100 if median_price_2022 else None
 
     # Calculate percentage difference vs. previous quarter
-    current_quarter_period = pd.Period('2024Q2', freq='Q')  # Ändern Sie dies entsprechend, um das aktuelle Quartal dynamisch zu bestimmen
+    current_quarter_period = pd.Period('2024Q3', freq='Q')  # Ändern Sie dies entsprechend, um das aktuelle Quartal dynamisch zu bestimmen
     previous_quarter_period = current_quarter_period - 1
     previous_quarter = previous_quarter_period.strftime('Q%q/%Y')
     
@@ -447,13 +446,13 @@ def update_tiles(selected_category, selected_age_cat):
     # Formatting tile contents
     tile_1_content = html.Div([
         html.Div(html.Strong("Händlereinkaufspreis"), style={'margin-bottom': '5px'}),
-        html.Div("(Q2/2024):", style={'margin-bottom': '10px'}),
+        html.Div("(Q3/2024):", style={'margin-bottom': '10px'}),
         html.Div(format_number(median_price_2023) + " €" if median_price_2023 else 'Data not available', style=number_style)
     ], style=tile_style)
 
     tile_2_content = html.Div([
     html.Div(html.Strong("Trend (Vorjahr)"), style={'margin-bottom': '5px'}),
-    html.Div("(vs. Q2/2023):", style={'margin-bottom': '10px'}),
+    html.Div("(vs. Q3/2023):", style={'margin-bottom': '10px'}),
     html.Div([
         html.Span(f"{percentage_diff_2022:.2f}%", style={'color': get_color(percentage_diff_2022)}),
         html.Span(f" ({format_number(median_price_2022)} €)" if median_price_2022 else ' (Data not available)', style={
